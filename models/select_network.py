@@ -101,6 +101,70 @@ def define_G(opt):
                     LayerNorm_type=opt_net['LayerNorm_type'],
                     dual_pixel_task=opt_net['dual_pixel_task'])
 
+    # ----------------------------------------
+    # RAMiT
+    # ----------------------------------------
+
+    elif net_type == 'ramit':
+            from models.network_ramit import RAMiT as net
+            netG = net(in_chans=opt_net['in_chans'],
+                    dim=opt_net['dim'],
+                    depths=opt_net['depths'],
+                    num_heads=opt_net['num_heads'],
+                    head_dim=opt_net['head_dim'],
+                    chsa_head_ratio=opt_net['chsa_head_ratio'],
+                    window_size=opt_net['window_size'],
+                    hidden_ratio=opt_net['hidden_ratio'],
+                    qkv_bias=opt_net['qkv_bias'],
+                    mv_ver=opt_net['mv_ver'],
+                    exp_factor=opt_net['exp_factor'],
+                    expand_groups=opt_net['expand_groups'],
+                    norm_layer=opt_net['norm_layer'],
+                    tail_mv=opt_net['tail_mv'],
+                    target_mode=opt_net['target_mode'],
+                    img_norm=opt_net['img_norm'],
+                    attn_drop=opt_net['attn_drop'],
+                    proj_drop=opt_net['proj_drop'],
+                    drop_path=opt_net['drop_path'],
+                    helper=opt_net['helper']
+                    ) 
+
+    # ----------------------------------------
+    # CAT
+    # ----------------------------------------
+    elif net_type == 'cat':
+        from models.network_cat import CAT_Unet as net
+        netG = net(
+            img_size=opt['datasets']['train']['H_size'],
+            in_chans=opt_net['in_chans'],
+            depths=opt_net['depths'],
+            split_size_0=opt_net['split_size_0'],
+            split_size_1=opt_net['split_size_1'],
+            dim=opt_net['dim'],
+            num_heads=opt_net['num_heads'],
+            mlp_ratio=opt_net['mlp_ratio'],
+            num_refinement_blocks=opt_net['num_refinement_blocks'],
+            bias=opt_net['bias'],
+            dual_pixel_task=opt_net['dual_pixel_task'])
+    # ----------------------------------------
+    # UFormer
+    # ----------------------------------------
+    elif net_type == 'uformer':
+            from models.network_uformer import Uformer as net
+            
+            netG = net(
+                    img_size=opt['datasets']['train']['H_size'],
+                    in_chans=opt_net['in_chans'],
+                    dd_in=opt_net['dd_in'],
+                    embed_dim=opt_net['embed_dim'],
+                    depths=opt_net['depths'],
+                    num_heads=opt_net['num_heads'],
+                    win_size=opt_net['win_size'],
+                    mlp_ratio=opt_net['mlp_ratio'],
+                    token_projection=opt_net['token_projection'],
+                    token_mlp=opt_net['token_mlp']
+                    )
+
 
     # ----------------------------------------
     # others
