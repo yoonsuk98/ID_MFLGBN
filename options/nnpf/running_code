@@ -1,0 +1,4 @@
+python TRAIN_psnr_16bit.py --opt ./options/nnpf/train_PROPOSED_nnpf_22.json
+python TRAIN_psnr_16bit.py --opt ./options/nnpf/train_PROPOSED_nnpf_27.json
+python TRAIN_psnr_16bit.py --opt ./options/nnpf/train_PROPOSED_nnpf_32.json
+python TRAIN_psnr_16bit.py --opt ./options/nnpf/train_PROPOSED_nnpf_37.json
